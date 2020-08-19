@@ -1,0 +1,101 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<fieldset class="scheduler-border">
+				<legend class="scheduler-border">Widget Summary</legend>
+				<table class="table table-hover table-responsive">
+					<tbody>
+						<tr ng-repeat="dataSeed in dataSeeds">
+							<td>{{dataSeed.widgetName}}</td>
+							<td><button type="button" class="update btn btn-warning btn-sm"
+									ng-click="widgetDetails(dataSeed)"><span
+										class="glyphicon glyphicon-pencil"></span></button></td>
+							<td><button type="button" data-toggle="modal" data-target="#delete" data-uid="1"
+									class="delete btn btn-danger btn-sm" ng-click = "toDeleteItem(dataSeed)"><span
+										class="glyphicon glyphicon-trash"></span></button></td>
+						</tr>
+
+
+					</tbody>
+				</table>
+			</fieldset>
+		</div>
+		<div class="col-md-6" id="detailsScreen" ng-show = "isDetailsEnable">
+			<fieldset class="scheduler-border">
+				<legend class="scheduler-border">Widget Details</legend>
+				<div class="closeButton">
+					<button type="button" class="close" aria-label="Close" ng-click = "isDetailsEnable = false">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="control-group">
+					<label class="control-label input-label" for="startTime">Name :</label>
+					<span>{{widgetDetailData.widgetName}} </span>
+				</div>
+				<div class="control-group">
+					<label class="control-label input-label" for="startTime">Number :</label>
+					<span>{{widgetDetailData.NumberInwords}} </span>
+				</div>
+				<div class="control-group">
+					<label class="control-label input-label" for="startTime">Key/Value Pair</label>
+					<ol>
+						<li ng-repeat="listData in widgetDetailData.widgetKeyValueData">
+							{{listData.key}} : {{listData.value}}
+						</li>
+
+					</ol>
+				</div>
+				<div style="float: right;">
+					<button type="button" class="update btn btn-warning btn-sm" ng-click="widgetEdit(widgetDetailData.id)"><span
+					class="glyphicon glyphicon-pencil">Edit</span></button></td>
+				</div>
+			</fieldset>
+		</div>
+			<div class="col-md-12">
+				<button type="button" class="update btn btn-primary btn-sm" ng-click="widgetAdd()"><span
+				class="glyphicon glyphicon-plus">Add</span></button></td>
+			</div>
+	</div>
+</div>
+<div id="edit" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h4 class="modal-title">Update Data</h4>
+			</div>
+			<div class="modal-body">
+				<input id="fn" type="text" class="form-control" name="fname" placeholder="First Name">
+				<input id="ln" type="text" class="form-control" name="fname" placeholder="Last Name">
+				<input id="mn" type="text" class="form-control" name="fname" placeholder="Middle Name">
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="up" class="btn btn-warning" data-dismiss="modal">Update</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="delete" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h4 class="modal-title">Delete Data</h4>
+			</div>
+			<div class="modal-body">
+				<strong>Are you sure you want to delete this data?</strong>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="del" class="btn btn-danger" data-dismiss="modal" ng-click = "widgetDelete()">Delete</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+	.closeButton {
+		margin-bottom: 20px;
+		margin-top: -20px;
+	}
+</style>

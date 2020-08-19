@@ -1,0 +1,76 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-10">
+			<fieldset class="scheduler-border">
+				<legend class="scheduler-border">Create Widget</legend>
+        <form class="form-horizontal" ng-submit="submitWidgetForm()" role="form">
+          <div class="form-group">
+              <label for="widgetName" class="col-sm-3 control-label">Name</label>
+              <div class="col-sm-6">
+                  <input type="text" id="widgetName" class="form-control" ng-model="widget.widgetName" required/>
+              </div>
+              <div class="col-sm-3"></div>
+  
+          </div>
+          <div class="form-group">
+              <label for="widgetNumber" class="col-sm-3 control-label">Number</label>
+              <div class="col-sm-6">
+                  <input type="text" id="widgetNumber" class="form-control" ng-model="widget.widgetNumber" required/>
+              </div>
+              <div class="col-sm-3"></div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="startTime">Key/Value Pair</label>
+            
+            <ol class="col-sm-12 col-sm-offset-3">
+             
+              <li class="col-sm-12" ng-repeat="data in widget.widgetKeyValueData" style="margin-bottom: 20px;">
+                <div class="col-sm-3 col-xs-3">
+                  <input type="text" id="key" class="form-control" ng-model="data.key" />
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <input type="text" id="value" class="form-control" ng-model="data.value" />
+            </div>
+            <div class="col-sm-3 col-xs-6">
+              <button type="button" class="btn btn-default btn-sm" disabled>
+                <span class="glyphicon glyphicon-plus-sign"></span> 
+              </button>
+              <button type="button" class="btn btn-danger btn-sm" ng-click="remove(data)">
+                <span class="glyphicon glyphicon-trash"></span> 
+              </button>
+            </div>
+            
+              </li>
+              <li class="col-sm-12" style="margin-bottom: 20px;" ng-if = "widget.widgetKeyValueData.length < 4">
+                <div class="col-sm-3 col-xs-3">
+                  <input type="text" id="listDataKey" class="form-control" ng-model="listData.key" />
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <input type="text" id="listDataKeyValue" class="form-control" ng-model="listData.value" />
+            </div>
+            <div class="col-sm-3 col-xs-6">
+              <button type="button" class="btn btn-default btn-sm" ng-click="addWidgetKV(listData)">
+                <span class="glyphicon glyphicon-plus-sign"></span> 
+              </button>
+              <button type="button" class="btn btn-danger btn-sm" ng-click="listData = {}">
+                <span class="glyphicon glyphicon-trash"></span> 
+              </button>
+            </div>               
+              </li>
+            </ol>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 col-sm-offset-8">
+              <input type="submit" value="Save" class="btn btn-primary " />
+              <button type="button" class="btn btn-danger btn-sm" ng-click="widgetCancel(listData)">
+                <span class="glyphicon glyphicon-remove">Cancel</span> 
+              </button>
+            </div>
+        </div>
+      </form>
+			</fieldset>
+    </div>
+    </div>
+    </div>
