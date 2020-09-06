@@ -3,7 +3,7 @@
 angular.module('myApp.home', ['ngRoute','ngStorage'])
 
 
-.controller('HomeCtrl', ['$scope','$localStorage','$location',function($scope,$localStorage,$location) {
+.controller('HomeCtrl', ['$scope','$localStorage','$location','dataStoreService',function($scope,$localStorage,$location,dataStoreService) {
   $scope.dataSeeds = [{
     "widgetName": "Widget 1",
     "id": 1,
@@ -25,6 +25,8 @@ angular.module('myApp.home', ['ngRoute','ngStorage'])
 $scope.dataToLocalStorage = function (){
 if( $localStorage.widgetList == undefined){
    $localStorage.widgetList = $scope.dataSeeds;
+} else {
+   $scope.dataSeeds =  dataStoreService.getListOfData();
 }
 }
 $scope.dataToLocalStorage()

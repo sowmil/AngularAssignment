@@ -9,7 +9,7 @@ angular.module('myApp.createWidget', ['ngRoute'])
   });
 }])
 
-.controller('createWidgetCtrl', ['$scope','$localStorage','$routeParams','$location',function($scope,$localStorage,$routeParams,$location) {
+.controller('createWidgetCtrl', ['$scope','$localStorage','$routeParams','$location','dataStoreService',function($scope,$localStorage,$routeParams,$location,dataStoreService) {
   $scope.widgetKeyValue = [];
   $scope.widget ={};
   $scope.listData = {};
@@ -30,7 +30,7 @@ $scope.submitWidgetForm = function () {
       $scope.listData={};
       if ($localStorage.widgetList.length > 0){
         $scope.widget.id = $localStorage.widgetList.length+1
-        $localStorage.widgetList.push($scope.widget);
+        dataStoreService.setValueToStorage($scope.widget); 
       } else {
         $scope.widget.id = 1
         $localStorage.widgetList = $scope.widget;
@@ -39,12 +39,13 @@ $scope.submitWidgetForm = function () {
   } else {
     if ($localStorage.widgetList.length > 0){
       $scope.widget.id = $localStorage.widgetList.length+1
-      $localStorage.widgetList.push($scope.widget);
+      dataStoreService.setValueToStorage($scope.widget); 
     } else {
       $scope.widget.id = 1 ;
       $localStorage.widgetList = $scope.widget;
     }
   }
+  $location.path('/home');
 }
 
 $scope.remove = function(item) { 

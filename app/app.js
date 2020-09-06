@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and core components
-angular.module('myApp', [
+var myApp = angular.module('myApp', [
   'ngRoute',
   'ngStorage',
   'myApp.createWidget',
@@ -17,3 +17,23 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
     controller: 'HomeCtrl'
   });
 }])
+
+myApp.service('dataStoreService',['$localStorage', function ($localStorage) {
+ 
+ this.setValueToStorage = function (data) {
+    $localStorage.widgetList.push(data)
+      return $localStorage.widgetList;
+  };
+
+ this.getValueByID = function (id) {
+    this.widget = $localStorage.widgetList.find(function(item){
+      return item.id == id;
+  });
+    return this.widget;
+};
+
+this.getListOfData = function (id) {
+  this.widget = $localStorage.widgetList;
+  return this.widget;
+};
+}]);

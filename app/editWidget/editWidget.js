@@ -9,16 +9,14 @@ angular.module('myApp.editWidget', ['ngRoute'])
   });
 }])
 
-.controller('EditWidgetCtrl', ['$scope','$localStorage','$routeParams','$location',function($scope,$localStorage,$routeParams,$location) {
+.controller('EditWidgetCtrl', ['$scope','$localStorage','$routeParams','$location','dataStoreService',function($scope,$localStorage,$routeParams,$location,dataStoreService) {
   $scope.paramId = $routeParams.id;
   $scope.widgetKeyValue = [];
   $scope.widget ={};
   $scope.listData = {};
   $scope.widget.widgetKeyValueData = [];
 
-  $scope.widget = $localStorage.widgetList.find(function(item){
-    return item.id == $scope.paramId;
-});
+  $scope.widget = dataStoreService.getValueByID($scope.paramId);
   
   $scope.addWidgetKV = function(data) {
     $scope.widget.widgetKeyValueData.push(data);
